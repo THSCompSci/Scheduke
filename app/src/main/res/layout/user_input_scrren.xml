@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/ClassScreen">
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/AssignmentName"
+        android:hint="Assignment Name"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:elevation="5dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="5dp"
+        android:layout_marginLeft="23dp"
+        android:layout_marginRight="23dp"
+        android:id="@+id/InfoLinLay"
+        android:orientation="horizontal">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:hint="Period"
+            android:layout_weight="6"
+            android:id="@+id/Period"
+            android:layout_gravity="center_horizontal"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:hint="Hour"
+            android:id="@+id/Hour"
+            android:layout_weight="2"
+            android:layout_gravity="center_horizontal"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:hint="Minute"
+            android:id="@+id/Min"
+            android:layout_weight="2"
+            android:layout_gravity="center_horizontal"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:hint="AM/PM"
+            android:id="@+id/TimeFrame"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="5dp"
+        android:layout_marginLeft="23dp"
+        android:layout_marginRight="23dp"
+        android:id="@+id/DateLinLay"
+        android:orientation="horizontal">
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Day"
+            android:hint="Day"
+            android:layout_weight="1"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Month"
+            android:hint="Month"
+            android:layout_weight="1"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Year"
+            android:hint="Year"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="5dp"
+        android:layout_marginLeft="23dp"
+        android:layout_marginRight="23dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:id="@+id/Buttons">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="OK"
+            android:id="@+id/ClassOKButton"
+            android:elevation="25dp" />
+
+    </LinearLayout>
+</LinearLayout >
