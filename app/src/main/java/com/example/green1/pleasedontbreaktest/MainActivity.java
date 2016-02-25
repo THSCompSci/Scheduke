@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.res.Resources;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
@@ -83,7 +84,10 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<View> mPreviousViews = new ArrayList<>();
     private View temp;
     private static final String TAG = "MyActivity";
-
+    private String[] mPlanetTiles;
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -132,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
         mClassPageList.setAdapter(mArrayAdapter2);
 
         final FloatingActionButton FAB = (FloatingActionButton) findViewById(R.id.fab);
-        FAB.setOnClickListener(new View.OnClickListener() {
+        /*FAB.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mPreviousViews.add(MainView.getCurrentView());
@@ -145,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
                             break;
                     }
                 }
-            });
+            });*/
         if(TextUtils.isEmpty(JulioisRightPeriod.getText())|| JulioisRightPeriod.getText().toString().length() <3)
         {
             inputPeriod = 1;

@@ -16,29 +16,30 @@
             <ListView
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
-                android:id="@+id/LV">
+                android:id="@+id/LV"
+                android:layout_margin="5dp">
             </ListView>
         </LinearLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/ClassPage">
-            <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Class"
-            android:textSize="32dp"
-            android:textAlignment="center"
-            android:background="#ffffff"
-            android:id="@+id/ClassName"/>
-            <ListView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/ClassName"
-                android:layout_marginTop="10dp"
-                android:elevation="10dp"
-                android:id="@+id/ListView"
-                android:layout_marginBottom="10dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Class"
+                    android:textSize="32dp"
+                    android:textAlignment="center"
+                    android:background="#ffffff"
+                    android:elevation="7dp"
+                    android:layout_margin="5dp"
+                    android:id="@+id/ClassName" />
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/ClassName"
+                    android:elevation="10dp"
+                    android:id="@+id/ListView">
             </ListView>
         </RelativeLayout>
         <LinearLayout
