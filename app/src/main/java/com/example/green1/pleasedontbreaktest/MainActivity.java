@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText assignmentInfoMonth;
     private EditText assignmentInfoDay;
     private EditText assignmentInfoYear;
+    private ListView FuckingSHIt;
     // private Notifications alarmTest = new Notifications("Progress", "It feels so good");
    // private Class classtest = new Class("Computer Science", 9, 45);
     private NotificationManager mNotificationManager;
