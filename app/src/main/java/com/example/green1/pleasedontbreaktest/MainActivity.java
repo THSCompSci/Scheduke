@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.AdapterView;
@@ -38,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout AddClassPage;
     private LinearLayout AddAssignmentPage;
     private LinearLayout infoPage;
+
+    private LinearLayout fadeBlackBackground;
+    private LinearLayout classAddTest;
 
     private static Button JuliosExistence;
     public static final int NOTIFICATION_ID = 3967;
@@ -101,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
             selectedClassName = selectedClass.getName();
         setContentView(R.layout.activity_main);
 
+
         MainView = (ViewAnimator) findViewById(R.id.MainAnimator);
         allClasses =(LinearLayout) findViewById(R.id.ListViewLayoutPage);
         classPage = (RelativeLayout) findViewById(R.id.ClassPage);
@@ -115,7 +120,8 @@ public class MainActivity extends AppCompatActivity {
         JulioisRightPeriod = (EditText)findViewById(R.id.AddPeriod);
         JulioisRightStartMin = (EditText)findViewById(R.id.AddMin);
         JulioisRightStartHour = (EditText)findViewById(R.id.AddHour);
-        JulioisRightClassName = (EditText)findViewById(R.id.AddedClassName);
+
+
 
         assigmentInfoName = (EditText)findViewById(R.id.edClassName);
         assignmentInfoDay = (EditText)findViewById(R.id.Day);
@@ -136,8 +142,12 @@ public class MainActivity extends AppCompatActivity {
         mClassPageList = (ListView) findViewById(R.id.ListView);
         mClassPageList.setAdapter(mArrayAdapter2);
 
+
+
+
+
         final FloatingActionButton FAB = (FloatingActionButton) findViewById(R.id.fab);
-        /*FAB.setOnClickListener(new View.OnClickListener() {
+        FAB.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mPreviousViews.add(MainView.getCurrentView());
@@ -150,8 +160,8 @@ public class MainActivity extends AppCompatActivity {
                             break;
                     }
                 }
-            });*/
-        if(TextUtils.isEmpty(JulioisRightPeriod.getText())|| JulioisRightPeriod.getText().toString().length() <3)
+            });
+        if(TextUtils.isEmpty(JulioisRightPeriod.getText())|| JulioisRightPeriod.getText().toString().length() < 3)
         {
             inputPeriod = 1;
         }
