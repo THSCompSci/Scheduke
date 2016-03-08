@@ -16,30 +16,29 @@
             <ListView
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
-                android:id="@+id/LV"
-                android:layout_margin="5dp">
+                android:id="@+id/LV">
             </ListView>
         </LinearLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/ClassPage">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Class"
-                    android:textSize="32dp"
-                    android:textAlignment="center"
-                    android:background="#ffffff"
-                    android:elevation="7dp"
-                    android:layout_margin="5dp"
-                    android:id="@+id/ClassName" />
-                <ListView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/ClassName"
-                    android:elevation="10dp"
-                    android:id="@+id/ListView">
+            <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Class"
+            android:textSize="32dp"
+            android:textAlignment="center"
+            android:background="#ffffff"
+            android:id="@+id/ClassName"/>
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/ClassName"
+                android:layout_marginTop="10dp"
+                android:elevation="10dp"
+                android:id="@+id/ListView"
+                android:layout_marginBottom="10dp">
             </ListView>
         </RelativeLayout>
         <LinearLayout
@@ -225,7 +224,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
-                    android:hint="Month"
+                    android:hint="Hour"
                     android:id="@+id/Month"
                     android:layout_weight="2"
                     android:layout_gravity="center_horizontal"/>
@@ -233,7 +232,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
-                    android:hint="Day"
+                    android:hint="Minute"
                     android:id="@+id/Day"
                     android:layout_weight="2"
                     android:layout_gravity="center_horizontal"/>

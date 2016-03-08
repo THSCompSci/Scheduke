@@ -3,14 +3,15 @@ package com.example.green1.pleasedontbreaktest;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Assignment
+import io.realm.RealmObject;
+
+public class Assignment extends RealmObject
 {
     private int difficulty;
     private Date dueDate;
     private boolean isDone;
     private int length;
     private String name;
-    private String[] neededMaterialList;
     private double points;
     private String teacher;
     private int timeToStart;
@@ -59,10 +60,6 @@ public class Assignment
         return this.name;
     }
 
-    public String[] getNeededMaterialList()
-    {
-        return this.neededMaterialList;
-    }
 
     public double getPoints()
     {
@@ -99,10 +96,6 @@ public class Assignment
         this.name = paramString;
     }
 
-    public void setNeededMaterialList(String[] paramArrayOfString)
-    {
-        this.neededMaterialList = paramArrayOfString;
-    }
 
     public void setPoints(double paramDouble)
     {
