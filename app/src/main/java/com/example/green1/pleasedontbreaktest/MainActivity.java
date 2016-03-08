@@ -1,18 +1,15 @@
 
-
 package com.example.green1.pleasedontbreaktest;
 
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.res.Resources;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.AdapterView;
@@ -27,6 +24,12 @@ import android.widget.ViewAnimator;
 
 import java.util.ArrayList;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import io.realm.RealmResults;
+
 public class MainActivity extends AppCompatActivity {
     private ListView mAllClasses;
     private ListView mClassPageList;
@@ -39,9 +42,6 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout AddClassPage;
     private LinearLayout AddAssignmentPage;
     private LinearLayout infoPage;
-
-    private LinearLayout fadeBlackBackground;
-    private LinearLayout classAddTest;
 
     private static Button JuliosExistence;
     public static final int NOTIFICATION_ID = 3967;
@@ -78,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
     private EditText assignmentInfoMonth;
     private EditText assignmentInfoDay;
     private EditText assignmentInfoYear;
-    private ListView FuckingSHIt;
     // private Notifications alarmTest = new Notifications("Progress", "It feels so good");
    // private Class classtest = new Class("Computer Science", 9, 45);
     private NotificationManager mNotificationManager;
@@ -88,23 +87,31 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> mArraySub= new ArrayList<String>();
     private ArrayList<View> mPreviousViews = new ArrayList<>();
     private View temp;
+    // Create a RealmConfiguration which is to locate Realm file in package's "files" directory.
+    RealmConfiguration realmConfig = new RealmConfiguration.Builder(aidsThis).build();
+    // Get a Realm instance for this thread
+    Realm realm = Realm.getInstance(realmConfig);
+
+
     private static final String TAG = "MyActivity";
-    private String[] mPlanetTiles;
-    private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-       if(die == null)
+        super.onCreate(savedInstanceState);
+        Schedule savedSchedule = realm.where(Schedule.class).findFirst();
+
+
+        if (realm.where(Schedule.class).findFirst() == null)
             die = new Schedule();
+        else
+            die = realm.where(Schedule.class).findFirst();
+
         aidsThis = this;
         if(selectedClass == null)
             selectedClass = die.getClassList().get(0);
         if(selectedClassName == null)
             selectedClassName = selectedClass.getName();
         setContentView(R.layout.activity_main);
-
 
         MainView = (ViewAnimator) findViewById(R.id.MainAnimator);
         allClasses =(LinearLayout) findViewById(R.id.ListViewLayoutPage);
@@ -120,14 +127,12 @@ public class MainActivity extends AppCompatActivity {
         JulioisRightPeriod = (EditText)findViewById(R.id.AddPeriod);
         JulioisRightStartMin = (EditText)findViewById(R.id.AddMin);
         JulioisRightStartHour = (EditText)findViewById(R.id.AddHour);
-
-
+        JulioisRightClassName = (EditText)findViewById(R.id.AddedClassName);
 
         assigmentInfoName = (EditText)findViewById(R.id.edClassName);
         assignmentInfoDay = (EditText)findViewById(R.id.Day);
         assignmentInfoMonth = (EditText)findViewById(R.id.Month);
         assignmentInfoYear = (EditText)findViewById(R.id.AssInfoYear);
-        assignmentInfoPeriod = (EditText)findViewById(R.id.Period);
 
 
         makeMArray();
@@ -141,10 +146,6 @@ public class MainActivity extends AppCompatActivity {
         mAllClasses.setAdapter(mArrayAdapter);
         mClassPageList = (ListView) findViewById(R.id.ListView);
         mClassPageList.setAdapter(mArrayAdapter2);
-
-
-
-
 
         final FloatingActionButton FAB = (FloatingActionButton) findViewById(R.id.fab);
         FAB.setOnClickListener(new View.OnClickListener() {
@@ -161,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             });
-        if(TextUtils.isEmpty(JulioisRightPeriod.getText())|| JulioisRightPeriod.getText().toString().length() < 3)
+        if(TextUtils.isEmpty(JulioisRightPeriod.getText())|| JulioisRightPeriod.getText().toString().length() <3)
         {
             inputPeriod = 1;
         }
@@ -247,32 +248,30 @@ public class MainActivity extends AppCompatActivity {
                 MainView.setDisplayedChild(4);
                 assignmentInfoYear.setText(selectedClass.getGradeList().get(position).getYear() + "");
                 assignmentInfoMonth.setText(selectedClass.getGradeList().get(position).getMonth() + "");
-                assignmentInfoDay.setText(selectedClass.getGradeList().get(position).getDay()+ "");
-                assigmentInfoName.setText(selectedClass.getGradeList().get(position).getName());
-                String tempPeriod = new String();
-                if(selectedClass.getPeriod() > 4)
-                {
-                    tempPeriod = "W" + (selectedClass.getPeriod() -4);
-                }
-                else
-                {
-                    tempPeriod = "G" + (selectedClass.getPeriod()
-                    );
+                assignmentInfoDay.setText(selectedClass.getGradeList().get(position).getDay() + "");
+                assigmentInfoName.setText(selectedClass.getGradeList().get(position).getName() + "");
+                String tempPeriod;
+                if (selectedClass.getPeriod() > 4) {
+                    tempPeriod = "W" + (selectedClass.getPeriod() - 4);
+                } else {
+                    tempPeriod = "G" + (selectedClass.getPeriod());
                 }
                 assignmentInfoPeriod.setText(tempPeriod);
             }
         });
-
+        realm.beginTransaction();
+        RealmList<Class> RealmSchedule = (RealmList<Class>) realm.copyToRealm(die.getClassList());
+        realm.commitTransaction();
 
     }
 
-    protected void onSaveInstanceState(Bundle state) {
+   /* protected void onSaveInstanceState(Bundle state) {
         super.onSaveInstanceState(state);
         state.putStringArrayList("ClassArray", mArray);
         state.putStringArrayList("ClassArraySub", mArraySub);
-        state.putParcelableArrayList("ClassList", die.getClassList());
+        //state.putParcelableArrayList("ClassList", die.getClassList());
         state.putCharSequence("SelectedClassName", selectedClassName);
-        state.putParcelable("SelectedClassObject", selectedClass);
+        //state.putParcelable("SelectedClassObject", selectedClass);
         Log.v(TAG, "save");
     }
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
@@ -283,7 +282,7 @@ public class MainActivity extends AppCompatActivity {
         selectedClassName = savedInstanceState.getCharSequence("SelectedClassName");
         selectedClass = savedInstanceState.getParcelable("SelectedClassObject");
         Log.v(TAG, "restore");
-    }
+    }*/
     public static NotificationCompat.Builder getBuilder() {
         return builder;
     }
@@ -345,10 +344,6 @@ public class MainActivity extends AppCompatActivity {
         MainView.setOutAnimation(tempOut);
     }
 
-
-    public static Button getJuliosExistence() {
-        return JuliosExistence;
-    }
     public void makeMArray() {
         if (mArray==null || die.getClassList().size() != mArray.size()) {
             mArray = new ArrayList<String>();
@@ -377,6 +372,7 @@ public class MainActivity extends AppCompatActivity {
         mAllClasses = null;
         mAllClasses = (ListView) findViewById(R.id.LV);
         mAllClasses.setAdapter(mArrayAdapter);
+
     }
     public void updateAssignmentView()
     {
