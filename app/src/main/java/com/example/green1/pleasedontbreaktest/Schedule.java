@@ -15,12 +15,31 @@ import io.realm.RealmObject;
 
 public class Schedule extends RealmObject
 {
+    private String name = "Fecal Distributor";
     private RealmList<Class> classList = new RealmList();
    // int counter = 0;
     //int position;
+    private RealmList<Class> AddToClassList;
 
+
+    public RealmList<Class> getAddToClassList() {
+        return AddToClassList;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setClassList(RealmList<Class> classList) {
+        this.classList = classList;
+    }
 
     public Schedule()
+
     {
         classList.add(new Class("Example Class Name", 8, 0 , 1 , "AM"));
     }
@@ -64,7 +83,7 @@ public class Schedule extends RealmObject
         this.classList = localArrayList;
     }
 */
-    public void addToClassList(Class JingleBells)
+    public void setAddToClassList(Class JingleBells)
     {
         classList.add(JingleBells);
     }

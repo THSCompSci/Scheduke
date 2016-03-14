@@ -25,7 +25,23 @@ public class Class extends RealmObject {
     private int startMins;
     private String teacher;
     private String AmPm;
+    private RealmList<StringArrayWrapper> AssignmentDates;
+    private RealmList<StringArrayWrapper> AssignmentNames;
+    private int AddAssignment;
 
+
+    public Class()
+    {
+        GPA  = 0.0;
+        isGreen = true;
+        name = "FeCeS Inc";
+        period = 1;
+        startHour = 8;
+        startMins = 0;
+        teacher = "Mr. Felcher";
+        AmPm = "AM";
+
+    }
     public Class(String paramString, int paramInt1, int paramInt2, int p, String Ap)
     {
         this.name = paramString;
@@ -98,14 +114,14 @@ public class Class extends RealmObject {
         return this.isGreen;
     }
 
-    public void rewind(int paramInt)
+   /* public void rewind(int paramInt)
     {
         Object localObject = Calendar.getInstance(TimeZone.getDefault()).getTime();
         SimpleDateFormat localSimpleDateFormat = new SimpleDateFormat("mm");
         localSimpleDateFormat.setTimeZone(TimeZone.getDefault());
         localObject = localSimpleDateFormat.format((Date)localObject);
         Notifications.notify(this.name + " " + "is starting soon.", Integer.toString(this.startMins - Integer.parseInt((String)localObject)) + " minutes until class starts.");
-    }
+    }*/
 
     public void setGPA(double paramDouble)
     {
@@ -167,11 +183,11 @@ public class Class extends RealmObject {
         AmPm = amPm;
     }
 
-    public void addAssignment(String name, int day, int month, int year)
+    public void setAddAssignment(String name, int day, int month, int year)
     {
         GradeList.add(new Assignment(name, day, month, year));
     }
-    public ArrayList<String> getAssignmentDates()
+   public ArrayList<String> getAssignmentDates()
     {
         ArrayList<String> aDates = new ArrayList<String>();
         for (Assignment a : GradeList)
@@ -180,7 +196,20 @@ public class Class extends RealmObject {
         }
         return aDates;
     }
-/*
+
+    public void setAssignmentDates(RealmList<StringArrayWrapper> assignmentDates) {
+        AssignmentDates = assignmentDates;
+    }
+
+    public void setAssignmentNames(RealmList<StringArrayWrapper> assignmentNames) {
+        AssignmentNames = assignmentNames;
+    }
+
+    public int getAddAssignment() {
+        return AddAssignment;
+    }
+
+    /*
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeDouble(GPA);

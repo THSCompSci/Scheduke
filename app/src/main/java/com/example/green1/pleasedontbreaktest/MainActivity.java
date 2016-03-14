@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
    // private Class classtest = new Class("Computer Science", 9, 45);
     private NotificationManager mNotificationManager;
     private TextView selectedClassTextView;
-    private ArrayList<String> mArray= new ArrayList<String>();;
+    private ArrayList<String> mArray= new ArrayList<String>();
     private Class selectedClass;
     private ArrayList<String> mArraySub= new ArrayList<String>();
     private ArrayList<View> mPreviousViews = new ArrayList<>();
@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if(!(TextUtils.isEmpty(JulioisRightClassName.getText())|| TextUtils.isEmpty(JulioisRightStartHour.getText())|| TextUtils.isEmpty(JulioisRightStartMin.getText())|| TextUtils.isEmpty(JulioisRightPeriod.getText()) || TextUtils.isEmpty(JulioisRightAMPM.getText())))
-                        die.addToClassList(new Class(JulioisRightClassName.getText().toString(), Integer.valueOf(JulioisRightStartHour.getText().toString()), Integer.valueOf(JulioisRightStartMin.getText().toString()), inputPeriod, JulioisRightAMPM.getText().toString().toUpperCase()));
+                        die.setAddToClassList(new Class(JulioisRightClassName.getText().toString(), Integer.valueOf(JulioisRightStartHour.getText().toString()), Integer.valueOf(JulioisRightStartMin.getText().toString()), inputPeriod, JulioisRightAMPM.getText().toString().toUpperCase()));
 
                     makeMArray();
                     makeMArraySub();
@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!(TextUtils.isEmpty(AssignmentName.getText()) || TextUtils.isEmpty(AssignmentDay.getText()) || TextUtils.isEmpty(AssignmentMonth.getText()) || TextUtils.isEmpty(AssignmentYear.getText())))
-                    selectedClass.addAssignment(AssignmentName.getText().toString(), Integer.valueOf(AssignmentDay.getText().toString()), Integer.valueOf(AssignmentMonth.getText().toString()), Integer.valueOf(AssignmentYear.getText().toString()));
+                    selectedClass.setAddAssignment(AssignmentName.getText().toString(), Integer.valueOf(AssignmentDay.getText().toString()), Integer.valueOf(AssignmentMonth.getText().toString()), Integer.valueOf(AssignmentYear.getText().toString()));
                 updateAssignmentView();
                 MainView.setDisplayedChild(1);
                 FAB.setVisibility(View.VISIBLE);
