@@ -20,10 +20,7 @@ public class Schedule extends RealmObject
     //int position;
 
 
-    public Schedule()
-    {
-        classList.add(new Class("Example Class Name", 8, 0 , 1 , "AM"));
-    }
+
     public Schedule(ArrayList<RealmObject> blah)
     {
         for (int i = 0; i < blah.size(); i++)
