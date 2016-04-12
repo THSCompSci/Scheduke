@@ -17,28 +17,19 @@ public class Schedule extends RealmObject
 {
     private String name = "Fecal Distributor";
     private RealmList<Classes> classList = new RealmList();
-   // int counter = 0;
-    //int position;
     private RealmList<Classes> AddToClassList;
-
-
-
     public RealmList<Classes> getAddToClassList() {
         return AddToClassList;
     }
-
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
     public void setClassList(RealmList<Classes> classList) {
         this.classList = classList;
     }
-
     public Schedule()
 
     {
