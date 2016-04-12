@@ -16,13 +16,14 @@ import io.realm.RealmObject;
 public class Schedule extends RealmObject
 {
     private String name = "Fecal Distributor";
-    private RealmList<Class> classList = new RealmList();
+    private RealmList<Classes> classList = new RealmList();
    // int counter = 0;
     //int position;
-    private RealmList<Class> AddToClassList;
+    private RealmList<Classes> AddToClassList;
 
 
-    public RealmList<Class> getAddToClassList() {
+
+    public RealmList<Classes> getAddToClassList() {
         return AddToClassList;
     }
 
@@ -34,20 +35,20 @@ public class Schedule extends RealmObject
         this.name = name;
     }
 
-    public void setClassList(RealmList<Class> classList) {
+    public void setClassList(RealmList<Classes> classList) {
         this.classList = classList;
     }
 
     public Schedule()
 
     {
-        classList.add(new Class("Example Class Name", 8, 0 , 1 , "AM"));
+        classList.add(new Classes("Example Class Name", 8, 0 , 1 , "AM"));
     }
-    public Schedule(ArrayList<RealmObject> blah)
+    public Schedule(RealmList<Classes> blah)
     {
         for (int i = 0; i < blah.size(); i++)
         {
-            classList.add((Class) blah.get(i));
+            classList.add((Classes) blah.get(i));
         }
     }
     /*public void addClass(String paramString, int paramInt1, int paramInt2,int p, String ampm)
@@ -60,9 +61,14 @@ public class Schedule extends RealmObject
 
     public int getSize(){ return classList.size(); }
 */
-    public RealmList<Class> getClassList()
+
+    public void setAddToClassList(RealmList<Classes> addToClassList) {
+        AddToClassList = addToClassList;
+    }
+
+    public RealmList<Classes> getClassList()
     {
-        return this.classList;
+        return classList;
     }
 
  /*   public void organizeClassList()
@@ -83,10 +89,6 @@ public class Schedule extends RealmObject
         this.classList = localArrayList;
     }
 */
-    public void setAddToClassList(Class JingleBells)
-    {
-        classList.add(JingleBells);
-    }
 
   /*  public int getCounter() {
         return counter;

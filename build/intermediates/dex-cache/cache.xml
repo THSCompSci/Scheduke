@@ -2,11 +2,11 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\760974\Documents\GitHub\Scheduke\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.0\jars\classes.jar"
+        jar="C:\Users\760974\.gradle\caches\modules-2\files-2.1\io.realm\realm-android\0.87.5\ab4e1fead1380252dad0e95658e53ea0c113e89c\realm-android-0.87.5.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="3f151e49c316a5ab2c065969a3b3b55ef9b393fc">
-        <dex dex="C:\Users\760974\Documents\GitHub\Scheduke\app\build\intermediates\pre-dexed\debug\classes-dbb4cf5e9bd8338b5b50d169acce7e76ff454c19.jar" />
+        sha1="ab4e1fead1380252dad0e95658e53ea0c113e89c">
+        <dex dex="C:\Users\760974\Documents\GitHub\Scheduke\app\build\intermediates\pre-dexed\debug\realm-android-0.87.5-f636bf7c57daf242e5118f74fd45ea6f6b3c9611.jar" />
     </item>
     <item
         jar="C:\Users\760974\Documents\GitHub\Scheduke\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\jars\libs\internal_impl-23.1.0.jar"
@@ -16,20 +16,6 @@
         <dex dex="C:\Users\760974\Documents\GitHub\Scheduke\app\build\intermediates\pre-dexed\debug\internal_impl-23.1.0-2a7de092a9e9412007ba329b1ca6d61053a8fe71.jar" />
     </item>
     <item
-        jar="C:\Users\760974\Documents\GitHub\Scheduke\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="ddde541c289c8b816a8f8fd6c325d80788c522a6">
-        <dex dex="C:\Users\760974\Documents\GitHub\Scheduke\app\build\intermediates\pre-dexed\debug\classes-c7c79317258b125c62aced1bfb2d8754882c1191.jar" />
-    </item>
-    <item
-        jar="C:\Users\760974\Documents\GitHub\Scheduke\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="57ae0d750ff83f0c738d21720224ac7ea866a094">
-        <dex dex="C:\Users\760974\Documents\GitHub\Scheduke\app\build\intermediates\pre-dexed\debug\classes-6738afeaa45e4c87f2c23d2809e3df856c6f09c5.jar" />
-    </item>
-    <item
         jar="C:\Users\760974\Documents\GitHub\Scheduke\app\build\intermediates\exploded-aar\com.android.support\design\23.1.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.1"
@@ -37,11 +23,32 @@
         <dex dex="C:\Users\760974\Documents\GitHub\Scheduke\app\build\intermediates\pre-dexed\debug\classes-e96d83a0cab6521b396ccb79dc1e31d042be2103.jar" />
     </item>
     <item
+        jar="C:\Users\760974\Documents\GitHub\Scheduke\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="ddde541c289c8b816a8f8fd6c325d80788c522a6">
+        <dex dex="C:\Users\760974\Documents\GitHub\Scheduke\app\build\intermediates\pre-dexed\debug\classes-c7c79317258b125c62aced1bfb2d8754882c1191.jar" />
+    </item>
+    <item
+        jar="C:\Users\760974\Documents\GitHub\Scheduke\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="3f151e49c316a5ab2c065969a3b3b55ef9b393fc">
+        <dex dex="C:\Users\760974\Documents\GitHub\Scheduke\app\build\intermediates\pre-dexed\debug\classes-dbb4cf5e9bd8338b5b50d169acce7e76ff454c19.jar" />
+    </item>
+    <item
         jar="C:\Users\760974\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.1.0\support-annotations-23.1.0.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="92e3fc113ec3ee36b64603a38857b95700025633">
         <dex dex="C:\Users\760974\Documents\GitHub\Scheduke\app\build\intermediates\pre-dexed\debug\support-annotations-23.1.0-254def78ee3e93b6005b97c02145a15ed8ccd118.jar" />
+    </item>
+    <item
+        jar="C:\Users\760974\Documents\GitHub\Scheduke\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="57ae0d750ff83f0c738d21720224ac7ea866a094">
+        <dex dex="C:\Users\760974\Documents\GitHub\Scheduke\app\build\intermediates\pre-dexed\debug\classes-6738afeaa45e4c87f2c23d2809e3df856c6f09c5.jar" />
     </item>
 
 </items>

@@ -15,7 +15,7 @@ import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.RealmResults;
 
-public class Class extends RealmObject {
+public class Classes extends RealmObject {
     private double GPA;
     private RealmList<Assignment> GradeList = new RealmList<Assignment>();
     private boolean isGreen;
@@ -30,7 +30,7 @@ public class Class extends RealmObject {
     private int AddAssignment;
 
 
-    public Class()
+    public Classes()
     {
         GPA  = 0.0;
         isGreen = true;
@@ -42,7 +42,7 @@ public class Class extends RealmObject {
         AmPm = "AM";
 
     }
-    public Class(String paramString, int paramInt1, int paramInt2, int p, String Ap)
+    public Classes(String paramString, int paramInt1, int paramInt2, int p, String Ap)
     {
         this.name = paramString;
         this.startHour = paramInt1;
@@ -51,7 +51,7 @@ public class Class extends RealmObject {
         period = p;
     }
 
-    public Class(String[] paramArrayOfString, String paramString1, int paramInt1, int paramInt2, int paramInt3, String paramString2)
+    public Classes(String[] paramArrayOfString, String paramString1, int paramInt1, int paramInt2, int paramInt3, String paramString2)
     {
         this.name = paramString1;
         this.period = paramInt1;
@@ -62,7 +62,7 @@ public class Class extends RealmObject {
 
     }
 
-    protected Class(Parcel in) {
+    protected Classes(Parcel in) {
         GPA = in.readDouble();
         isGreen = in.readByte() != 0;
         name = in.readString();
@@ -71,6 +71,7 @@ public class Class extends RealmObject {
         startMins = in.readInt();
         teacher = in.readString();
     }
+
 
 
 
@@ -123,6 +124,10 @@ public class Class extends RealmObject {
         Notifications.notify(this.name + " " + "is starting soon.", Integer.toString(this.startMins - Integer.parseInt((String)localObject)) + " minutes until class starts.");
     }*/
 
+    public void setAddAssignment(int addAssignment) {
+        AddAssignment = addAssignment;
+    }
+
     public void setGPA(double paramDouble)
     {
         this.GPA = paramDouble;
@@ -164,12 +169,12 @@ public class Class extends RealmObject {
     }
 
 
-    public ArrayList<String> getAssignmentNames()
+    public RealmList<StringArrayWrapper> getAssignmentNames()
     {
-        ArrayList<String> JulioLiesHabitually = new ArrayList<String>();
+        RealmList<StringArrayWrapper> JulioLiesHabitually = new RealmList<StringArrayWrapper>();
         for(Assignment a : GradeList)
         {
-            JulioLiesHabitually.add(a.getName());
+            JulioLiesHabitually.add(new StringArrayWrapper(a.getName()));
         }
         return JulioLiesHabitually;
     }
@@ -187,12 +192,12 @@ public class Class extends RealmObject {
     {
         GradeList.add(new Assignment(name, day, month, year));
     }
-   public ArrayList<String> getAssignmentDates()
+    public RealmList<StringArrayWrapper> getAssignmentDates()
     {
-        ArrayList<String> aDates = new ArrayList<String>();
+        RealmList<StringArrayWrapper> aDates = new RealmList<StringArrayWrapper>();
         for (Assignment a : GradeList)
         {
-            aDates.add(a.getDay() + "/" + a.getMonth() + "/" + a.getYear());
+            aDates.add(new StringArrayWrapper(a.getDay() + "/" + a.getMonth() + "/" + a.getYear()));
         }
         return aDates;
     }
