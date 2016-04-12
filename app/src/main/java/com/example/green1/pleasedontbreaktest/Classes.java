@@ -15,7 +15,7 @@ import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.RealmResults;
 
-public class Class extends RealmObject {
+public class Classes extends RealmObject {
     private double GPA;
     private RealmList<Assignment> GradeList = new RealmList<Assignment>();
     private boolean isGreen;
@@ -25,8 +25,24 @@ public class Class extends RealmObject {
     private int startMins;
     private String teacher;
     private String AmPm;
+    private RealmList<StringArrayWrapper> AssignmentDates;
+    private RealmList<StringArrayWrapper> AssignmentNames;
+    private int AddAssignment;
 
-    public Class(String paramString, int paramInt1, int paramInt2, int p, String Ap)
+
+    public Classes()
+    {
+        GPA  = 0.0;
+        isGreen = true;
+        name = "FeCeS Inc";
+        period = 1;
+        startHour = 8;
+        startMins = 0;
+        teacher = "Mr. Felcher";
+        AmPm = "AM";
+
+    }
+    public Classes(String paramString, int paramInt1, int paramInt2, int p, String Ap)
     {
         this.name = paramString;
         this.startHour = paramInt1;
@@ -35,7 +51,7 @@ public class Class extends RealmObject {
         period = p;
     }
 
-    public Class(String[] paramArrayOfString, String paramString1, int paramInt1, int paramInt2, int paramInt3, String paramString2)
+    public Classes(String[] paramArrayOfString, String paramString1, int paramInt1, int paramInt2, int paramInt3, String paramString2)
     {
         this.name = paramString1;
         this.period = paramInt1;
@@ -46,7 +62,7 @@ public class Class extends RealmObject {
 
     }
 
-    protected Class(Parcel in) {
+    protected Classes(Parcel in) {
         GPA = in.readDouble();
         isGreen = in.readByte() != 0;
         name = in.readString();
@@ -55,6 +71,7 @@ public class Class extends RealmObject {
         startMins = in.readInt();
         teacher = in.readString();
     }
+
 
 
 
@@ -98,13 +115,17 @@ public class Class extends RealmObject {
         return this.isGreen;
     }
 
-    public void rewind(int paramInt)
+   /* public void rewind(int paramInt)
     {
         Object localObject = Calendar.getInstance(TimeZone.getDefault()).getTime();
         SimpleDateFormat localSimpleDateFormat = new SimpleDateFormat("mm");
         localSimpleDateFormat.setTimeZone(TimeZone.getDefault());
         localObject = localSimpleDateFormat.format((Date)localObject);
         Notifications.notify(this.name + " " + "is starting soon.", Integer.toString(this.startMins - Integer.parseInt((String)localObject)) + " minutes until class starts.");
+    }*/
+
+    public void setAddAssignment(int addAssignment) {
+        AddAssignment = addAssignment;
     }
 
     public void setGPA(double paramDouble)
@@ -148,12 +169,12 @@ public class Class extends RealmObject {
     }
 
 
-    public ArrayList<String> getAssignmentNames()
+    public RealmList<StringArrayWrapper> getAssignmentNames()
     {
-        ArrayList<String> JulioLiesHabitually = new ArrayList<String>();
+        RealmList<StringArrayWrapper> JulioLiesHabitually = new RealmList<StringArrayWrapper>();
         for(Assignment a : GradeList)
         {
-            JulioLiesHabitually.add(a.getName());
+            JulioLiesHabitually.add(new StringArrayWrapper(a.getName()));
         }
         return JulioLiesHabitually;
     }
@@ -167,20 +188,33 @@ public class Class extends RealmObject {
         AmPm = amPm;
     }
 
-    public void addAssignment(String name, int day, int month, int year)
+    public void setAddAssignment(String name, int day, int month, int year)
     {
         GradeList.add(new Assignment(name, day, month, year));
     }
-    public ArrayList<String> getAssignmentDates()
+    public RealmList<StringArrayWrapper> getAssignmentDates()
     {
-        ArrayList<String> aDates = new ArrayList<String>();
+        RealmList<StringArrayWrapper> aDates = new RealmList<StringArrayWrapper>();
         for (Assignment a : GradeList)
         {
-            aDates.add(a.getDay() + "/" + a.getMonth() + "/" + a.getYear());
+            aDates.add(new StringArrayWrapper(a.getDay() + "/" + a.getMonth() + "/" + a.getYear()));
         }
         return aDates;
     }
-/*
+
+    public void setAssignmentDates(RealmList<StringArrayWrapper> assignmentDates) {
+        AssignmentDates = assignmentDates;
+    }
+
+    public void setAssignmentNames(RealmList<StringArrayWrapper> assignmentNames) {
+        AssignmentNames = assignmentNames;
+    }
+
+    public int getAddAssignment() {
+        return AddAssignment;
+    }
+
+    /*
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeDouble(GPA);

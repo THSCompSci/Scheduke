@@ -22,6 +22,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import io.realm.RealmList;
+
 /**
  * Created by julio on 9/22/15.
  */
@@ -39,11 +41,21 @@ public class CustomArrayAdapter extends BaseAdapter implements ListAdapter {
         for(int i = 0; i < list.size(); i++) {
             this.listSub.add(listSub.get(i));
         }
+        this.context = context;
+    }
+
+
+    public CustomArrayAdapter(RealmList<StringArrayWrapper> list, RealmList<StringArrayWrapper> listSub, Context context) {
+        for (int index = 0; index < list.size(); index++) {
+            this.list.add(list.get(index).getStupid());
+        }
+        for (int i = 0; i < list.size(); i++) {
+            this.listSub.add(listSub.get(i).getStupid());
+        }
 
 
         this.context = context;
     }
-
     @Override
     public int getCount() {
         return list.size();
@@ -80,6 +92,3 @@ public class CustomArrayAdapter extends BaseAdapter implements ListAdapter {
         return view;
     }
 }
-
-
-

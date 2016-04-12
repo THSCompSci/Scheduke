@@ -15,17 +15,31 @@ import io.realm.RealmObject;
 
 public class Schedule extends RealmObject
 {
-    private RealmList<Class> classList = new RealmList();
-   // int counter = 0;
-    //int position;
+    private String name = "Fecal Distributor";
+    private RealmList<Classes> classList = new RealmList();
+    private RealmList<Classes> AddToClassList;
+    public RealmList<Classes> getAddToClassList() {
+        return AddToClassList;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setClassList(RealmList<Classes> classList) {
+        this.classList = classList;
+    }
+    public Schedule()
 
-
-
-    public Schedule(ArrayList<RealmObject> blah)
+    {
+        classList.add(new Classes("Example Class Name", 8, 0 , 1 , "AM"));
+    }
+    public Schedule(RealmList<Classes> blah)
     {
         for (int i = 0; i < blah.size(); i++)
         {
-            classList.add((Class) blah.get(i));
+            classList.add((Classes) blah.get(i));
         }
     }
     /*public void addClass(String paramString, int paramInt1, int paramInt2,int p, String ampm)
@@ -38,9 +52,14 @@ public class Schedule extends RealmObject
 
     public int getSize(){ return classList.size(); }
 */
-    public RealmList<Class> getClassList()
+
+    public void setAddToClassList(RealmList<Classes> addToClassList) {
+        AddToClassList = addToClassList;
+    }
+
+    public RealmList<Classes> getClassList()
     {
-        return this.classList;
+        return classList;
     }
 
  /*   public void organizeClassList()
@@ -61,10 +80,6 @@ public class Schedule extends RealmObject
         this.classList = localArrayList;
     }
 */
-    public void addToClassList(Class JingleBells)
-    {
-        classList.add(JingleBells);
-    }
 
   /*  public int getCounter() {
         return counter;

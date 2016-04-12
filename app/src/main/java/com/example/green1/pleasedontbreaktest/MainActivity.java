@@ -23,6 +23,7 @@ import android.widget.Toast;
 import android.widget.ViewAnimator;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -82,15 +83,15 @@ public class MainActivity extends AppCompatActivity {
    // private Class classtest = new Class("Computer Science", 9, 45);
     private NotificationManager mNotificationManager;
     private TextView selectedClassTextView;
-    private ArrayList<String> mArray= new ArrayList<String>();;
-    private Class selectedClass;
+    private ArrayList<String> mArray= new ArrayList<String>();
+    private Classes selectedClass;
     private ArrayList<String> mArraySub= new ArrayList<String>();
     private ArrayList<View> mPreviousViews = new ArrayList<>();
     private View temp;
     // Create a RealmConfiguration which is to locate Realm file in package's "files" directory.
-    RealmConfiguration realmConfig = new RealmConfiguration.Builder(aidsThis).build();
+    RealmConfiguration realmConfig;
     // Get a Realm instance for this thread
-    Realm realm = Realm.getInstance(realmConfig);
+    Realm realm;
 
 
     private static final String TAG = "MyActivity";
@@ -98,19 +99,28 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Schedule savedSchedule = realm.where(Schedule.class).findFirst();
+        //Schedule savedSchedule = realm.where(Schedule.class).findFirst();
 
-
-        if (realm.where(Schedule.class).findFirst() == null)
+        try
+        {
+            die = new Schedule((realm.where(TransferedClasses.class).findFirst()).getRealmClasses());
+        }
+        catch (NullPointerException exception)
+        {
             die = new Schedule();
-        else
-            die = realm.where(Schedule.class).findFirst();
+        }
 
         aidsThis = this;
+        realmConfig = new RealmConfiguration.Builder(aidsThis)
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        realm = Realm.getInstance(realmConfig);
+
         if(selectedClass == null)
             selectedClass = die.getClassList().get(0);
         if(selectedClassName == null)
             selectedClassName = selectedClass.getName();
+
         setContentView(R.layout.activity_main);
 
         MainView = (ViewAnimator) findViewById(R.id.MainAnimator);
@@ -133,6 +143,8 @@ public class MainActivity extends AppCompatActivity {
         assignmentInfoDay = (EditText)findViewById(R.id.Day);
         assignmentInfoMonth = (EditText)findViewById(R.id.Month);
         assignmentInfoYear = (EditText)findViewById(R.id.AssInfoYear);
+        assignmentInfoPeriod= (EditText)findViewById(R.id.Period);
+
 
 
         makeMArray();
@@ -182,8 +194,22 @@ public class MainActivity extends AppCompatActivity {
             addClassButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(!(TextUtils.isEmpty(JulioisRightClassName.getText())|| TextUtils.isEmpty(JulioisRightStartHour.getText())|| TextUtils.isEmpty(JulioisRightStartMin.getText())|| TextUtils.isEmpty(JulioisRightPeriod.getText()) || TextUtils.isEmpty(JulioisRightAMPM.getText())))
-                        die.addToClassList(new Class(JulioisRightClassName.getText().toString(), Integer.valueOf(JulioisRightStartHour.getText().toString()), Integer.valueOf(JulioisRightStartMin.getText().toString()), inputPeriod, JulioisRightAMPM.getText().toString().toUpperCase()));
+                    if (!(TextUtils.isEmpty(JulioisRightClassName.getText()) || TextUtils.isEmpty(JulioisRightStartHour.getText()) || TextUtils.isEmpty(JulioisRightStartMin.getText()) || TextUtils.isEmpty(JulioisRightPeriod.getText()) || TextUtils.isEmpty(JulioisRightAMPM.getText())))
+                    {
+                        RealmList<Classes> tempList = die.getClassList();
+                        realm.beginTransaction();
+                        Classes screwRealm = realm.createObject(Classes.class);
+                        screwRealm.setName(JulioisRightClassName.getText().toString());
+                        screwRealm.setStartHour(Integer.valueOf(JulioisRightStartHour.getText().toString()));
+                        screwRealm.setStartMins(Integer.valueOf(JulioisRightStartMin.getText().toString()));
+                        screwRealm.setPeriod(inputPeriod);
+                        screwRealm.setAmPm(JulioisRightAMPM.getText().toString().toUpperCase());
+
+                        tempList.add(screwRealm);
+                        die.setClassList(tempList);
+                        realm.cancelTransaction();
+                    }
+
 
                     makeMArray();
                     makeMArraySub();
@@ -205,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!(TextUtils.isEmpty(AssignmentName.getText()) || TextUtils.isEmpty(AssignmentDay.getText()) || TextUtils.isEmpty(AssignmentMonth.getText()) || TextUtils.isEmpty(AssignmentYear.getText())))
-                    selectedClass.addAssignment(AssignmentName.getText().toString(), Integer.valueOf(AssignmentDay.getText().toString()), Integer.valueOf(AssignmentMonth.getText().toString()), Integer.valueOf(AssignmentYear.getText().toString()));
+                    selectedClass.setAddAssignment(AssignmentName.getText().toString(), Integer.valueOf(AssignmentDay.getText().toString()), Integer.valueOf(AssignmentMonth.getText().toString()), Integer.valueOf(AssignmentYear.getText().toString()));
                 updateAssignmentView();
                 MainView.setDisplayedChild(1);
                 FAB.setVisibility(View.VISIBLE);
@@ -233,7 +259,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (MainView.getCurrentView() == allClasses) {
                     screenSwitch();
-                    selectedClassName = ((Class) die.getClassList().get(position)).getName();
+                    selectedClassName = ((Classes) die.getClassList().get(position)).getName();
                     ((TextView) findViewById(R.id.ClassName)).setText(selectedClassName);
                     return;
                 }
@@ -260,7 +286,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         realm.beginTransaction();
-        RealmList<Class> RealmSchedule = (RealmList<Class>) realm.copyToRealm(die.getClassList());
+       // RealmList<Classes> RealmSchedule = new RealmList<Classes>(realm.copyToRealm(die.getClassList()));
+        ArrayList<Classes> RealmSchedule = (ArrayList<Classes>)realm.copyToRealm(die.getClassList());
+        TransferedClasses yay = new TransferedClasses(die.getClassList());
+        realm.copyToRealm(yay);
         realm.commitTransaction();
 
     }
@@ -359,9 +388,9 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0; i < die.getClassList().size(); i++)
             {
                 if (die.getClassList().get(i).getStartMins() > 9)
-                    mArraySub.add((Integer.toString(((Class) die.getClassList().get(i)).getStartHour()) + ":" + (Integer.toString(((Class) die.getClassList().get(i)).getStartMins())))+" " + die.getClassList().get(i).getAmPm().toUpperCase());
+                    mArraySub.add((Integer.toString(((Classes) die.getClassList().get(i)).getStartHour()) + ":" + (Integer.toString(((Classes) die.getClassList().get(i)).getStartMins())))+" " + die.getClassList().get(i).getAmPm().toUpperCase());
                 else
-                     mArraySub.add(Integer.toString(((Class) die.getClassList().get(i)).getStartHour()) + ":0" + (Integer.toString(((Class) die.getClassList().get(i)).getStartMins()))+" " + die.getClassList().get(i).getAmPm().toUpperCase());
+                     mArraySub.add(Integer.toString(((Classes) die.getClassList().get(i)).getStartHour()) + ":0" + (Integer.toString(((Classes) die.getClassList().get(i)).getStartMins()))+" " + die.getClassList().get(i).getAmPm().toUpperCase());
             }
         }
     }
